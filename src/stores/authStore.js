@@ -11,7 +11,7 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     login(email, password) {
       // Mock login
-      if (email === 'admin@kicksspace.com') {
+      if (email === 'admin@gmail.com') {
         this.user = { email, name: 'Administrator', role: 'admin' };
       } else {
         this.user = { email, name: email.split('@')[0], role: 'user' };

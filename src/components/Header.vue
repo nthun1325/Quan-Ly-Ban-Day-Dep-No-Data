@@ -27,7 +27,7 @@
         <div class="auth-section">
           <template v-if="authStore.isAuthenticated">
             <div class="user-menu">
-              <span class="user-greeting">Chào, {{ authStore.user.name }}</span>
+              <router-link to="/account" class="nav-link user-greeting">Chào, {{ authStore.user.name }}</router-link>
               <router-link v-if="authStore.isAdmin" to="/admin" class="nav-link admin-link">Admin</router-link>
               <button @click="handleLogout" class="nav-link logout-text-btn">Đăng xuất</button>
             </div>

@@ -29,6 +29,12 @@ const routes = [
     component: () => import('../pages/Checkout.vue')
   },
   {
+    path: '/account',
+    name: 'Account',
+    component: () => import('../pages/UserDashboard.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
     path: '/login',
     name: 'Login',
     component: () => import('../pages/Login.vue')
@@ -55,9 +61,16 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore();
+  
   if (to.meta.requiresAdmin) {
-    const authStore = useAuthStore();
     if (!authStore.isAdmin) {
+      next('/login');
+    } else {
+      next();
+    }
+  } else if (to.meta.requiresAuth) {
+    if (!authStore.isAuthenticated) {
       next('/login');
     } else {
       next();
